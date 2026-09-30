@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SAFA Quotation</title>
+<meta name="theme-color" content="#26282B">
+<meta name="description" content="SAFA Electronics Ltd. lift offer quotation maker">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/favicon.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFA Quote">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <img src="icons/icon-192.png" alt="" class="topbar-logo">
+    <div class="topbar-title">
+      <strong>SAFA Quotation</strong>
+      <span id="topbar-sub">New offer</span>
+    </div>
+    <button class="btn-ghost" id="btn-install" hidden>Install</button>
+    <button class="btn-ghost" id="btn-new" title="Start a new quotation">New</button>
+  </div>
+  <div class="topbar-band" aria-hidden="true"></div>
+</header>
+
+<main class="layout">
+  <!-- ============ FORM ============ -->
+  <section class="view" id="view-form" data-view="form">
+
+    <div class="brand-picker">
+      <p class="picker-label">Choose brand</p>
+      <div class="brand-chips" id="brand-chips"></div>
+    </div>
+
+    <details class="group" open>
+      <summary><span class="step">1</span>Brand &amp; reference</summary>
+      <div class="fields">
+        <label class="f"><span>Country of origin</span>
+          <input data-k="country" list="country-list" autocomplete="off">
+          <datalist id="country-list"><option>China</option><option>South Korea</option><option>Japan</option><option>Germany</option><option>Turkey</option></datalist>
+        </label>
+        <label class="f full"><span>Brand address <em>(technical data remark)</em></span>
+          <textarea data-k="brandAddress" rows="2"></textarea>
+        </label>
+        <label class="f"><span>Date</span><input type="date" data-k="date"></label>
+        <label class="f"><span>Ref code <em>(e.g. LVT)</em></span><input data-k="refSuffix" autocapitalize="characters"></label>
+        <label class="f full"><span>Ref. No <em>(blank = auto)</em></span><input data-k="ref" data-auto="ref"></label>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary><span class="step">2</span>Client</summary>
+      <div class="fields">
+        <label class="f full"><span>Top line <em>(optional)</em></span>
+          <input data-k="toLine" list="toline-list" placeholder="e.g. The Respected Authority">
+          <datalist id="toline-list"><option>The Respected Authority</option><option>Respected Authority,</option><option>The Managing Director</option><option>The Chairman</option></datalist>
+        </label>
+        <label class="f full"><span>Client / building name</span><input data-k="clientName" placeholder="e.g. Rafiqul Islam or Lake View Tower"></label>
+        <label class="f full"><span>Address</span><textarea data-k="clientAddress" rows="2" placeholder="Plot, road, area, Dhaka"></textarea></label>
+        <label class="f"><span>Phone <em>(optional)</em></span><input data-k="clientPhone" type="tel" inputmode="tel"></label>
+        <label class="f"><span>Greeting</span>
+          <select data-k="dear"><option>Dear Sir,</option><option>Dear Madam,</option><option>Dear Sir/Madam,</option></select>
+        </label>
+        <label class="f"><span>Project name <em>(optional)</em></span><input data-k="projectName" placeholder="e.g. Lake View Tower"></label>
+        <label class="f"><span>Location <em>(optional)</em></span><input data-k="projectLocation" placeholder="e.g. Adabor, Dhaka"></label>
+        <label class="f full"><span>Letter style</span>
+          <select data-k="letterStyle">
+            <option value="auto">Auto</option>
+            <option value="intro">Company introduction</option>
+            <option value="project">Project offer</option>
+          </select>
+        </label>
+        <label class="f full"><span>Subject <em>(blank = auto)</em></span><textarea data-k="subject" data-auto="subject" rows="2"></textarea></label>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary><span class="step">3</span>Lift &amp; price</summary>
+      <div class="fields">
+        <label class="f"><span>Quantity (lifts)</span><input data-k="qty" type="number" min="1" inputmode="numeric"></label>
+        <label class="f"><span>Lift name</span><input data-k="liftName"></label>
+        <label class="f"><span>Capacity (kg)</span>
+          <input data-k="capacity" type="number" inputmode="numeric" list="kg-list">
+          <datalist id="kg-list"><option>320</option><option>400</option><option>450</option><option>550</option><option>600</option><option>630</option><option>800</option><option>1000</option><option>1150</option><option>1350</option><option>1600</option></datalist>
+        </label>
+        <label class="f"><span>Persons <em>(blank = auto)</em></span><input data-k="persons" data-auto="persons" type="number" inputmode="numeric"></label>
+        <label class="f"><span>Speed (m/s)</span>
+          <input data-k="speed" inputmode="decimal" list="speed-list">
+          <datalist id="speed-list"><option>1.0</option><option>1.5</option><option>1.6</option><option>1.75</option><option>2.0</option><option>2.5</option></datalist>
+        </label>
+        <label class="f"><span>Basement floors</span><input data-k="basements" type="number" min="0" max="5" inputmode="numeric"></label>
+        <label class="f"><span>Top floor number</span><input data-k="topFloor" type="number" min="0" inputmode="numeric"></label>
+        <label class="f"><span>Stops <em>(blank = auto)</em></span><input data-k="stops" data-auto="stops" type="number" inputmode="numeric"></label>
+        <label class="f full"><span>Serving floors <em>(blank = auto)</em></span><input data-k="floors" data-auto="floors"></label>
+        <label class="f"><span>Unit price (Tk.)</span><input data-k="unitPrice" type="number" inputmode="numeric"></label>
+        <div class="f total-box"><span>Total</span><output id="out-total">—</output><small id="out-words"></small></div>
+        <label class="f"><span>Offer validity (days)</span><input data-k="validity" type="number" inputmode="numeric"></label>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary><span class="step">4</span>Notes, payment &amp; timeline</summary>
+      <div class="fields">
+        <label class="f full"><span>Notes <em>(one per line)</em></span><textarea data-k="notes" rows="3"></textarea></label>
+        <label class="f full"><span>Payment terms <em>(one per line)</em></span><textarea data-k="payment" rows="3"></textarea></label>
+        <label class="f"><span>Manufacturing time</span><input data-k="t1"></label>
+        <label class="f"><span>Shipping &amp; delivery</span><input data-k="t2"></label>
+        <label class="f"><span>Installation to handover</span><input data-k="t3"></label>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary><span class="step">5</span>Warranty &amp; service</summary>
+      <div class="fields">
+        <label class="f full"><span>Warranty type</span>
+          <select data-k="warrantyType"><option value="warranty">Warranty</option><option value="replacement">Replacement warranty (orange highlight)</option></select>
+        </label>
+        <label class="f"><span>Warranty length</span><input data-k="warrantyValue" type="number" inputmode="numeric"></label>
+        <label class="f"><span>Unit</span><select data-k="warrantyUnit"><option value="months">Months</option><option value="years">Years</option></select></label>
+        <label class="f"><span>Spare parts (years)</span><input data-k="spareYears" type="number" inputmode="numeric"></label>
+        <label class="f"><span>Free maintenance (years)</span><input data-k="maintYears" type="number" inputmode="numeric"></label>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary><span class="step">6</span>Technical data</summary>
+      <div class="fields">
+        <label class="f"><span>Cabin size <em>(optional)</em></span><input data-k="cabinSize" placeholder="1250 mm × 1100 mm"></label>
+        <label class="f"><span>Shaft size <em>(optional)</em></span><input data-k="shaftSize" placeholder="5′-6″ × 6′-0″"></label>
+        <label class="f full"><span>Cabin description</span><textarea data-k="cabinDesc" rows="2"></textarea></label>
+        <label class="f"><span>Machine room</span><select data-k="machineRoom"><option value="MR">MR (with machine room)</option><option value="MRL">MRL (machine room-less)</option></select></label>
+        <label class="f"><span>Model / series</span><input data-k="model"></label>
+        <label class="f"><span>Elevator motor</span><input data-k="motor"></label>
+        <label class="f"><span>Power</span><input data-k="power"></label>
+        <label class="f"><span>Groove</span><input data-k="groove"></label>
+        <label class="f"><span>Control type</span><select data-k="control"><option>Simplex</option><option>Duplex</option><option>Group</option></select></label>
+        <label class="f"><span>Base floor <em>(blank = auto)</em></span><input data-k="baseFloor" data-auto="baseFloor"></label>
+        <label class="f"><span>Code</span><input data-k="code"></label>
+      </div>
+    </details>
+
+    <details class="group">
+      <summary><span class="step">7</span>Optional functions</summary>
+      <div class="fields toggles" id="opt-toggles"></div>
+      <div class="fields">
+        <label class="f"><span>Counterweight material</span><input data-k="cwMaterial"></label>
+        <label class="f"><span>Counterweight position</span><input data-k="cwPosition"></label>
+      </div>
+    </details>
+
+    <details class="group" open>
+      <summary><span class="step">8</span>Signed by</summary>
+      <div class="people" id="people-pick"></div>
+      <button class="btn-line" id="btn-add-person" type="button">+ Add another person</button>
+      <div class="person-form" id="person-form" hidden>
+        <div class="fields">
+          <label class="f"><span>Name</span><input id="pf-name"></label>
+          <label class="f"><span>Designation</span><input id="pf-des" list="des-list"><datalist id="des-list"><option>Managing Director</option><option>Director</option><option>Chairman</option><option>General Manager</option><option>Sales Manager</option></datalist></label>
+          <label class="f"><span>Phone</span><input id="pf-phone" type="tel"></label>
+          <label class="f"><span>E-mail</span><input id="pf-email" type="email"></label>
+        </div>
+        <div class="row-btns">
+          <button class="btn-line" type="button" id="pf-cancel">Cancel</button>
+          <button class="btn-solid" type="button" id="pf-save">Add person</button>
+        </div>
+      </div>
+    </details>
+
+    <div class="spacer"></div>
+  </section>
+
+  <!-- ============ PREVIEW ============ -->
+  <section class="view" id="view-preview" data-view="preview">
+    <div class="preview-head">
+      <strong>Preview</strong><span id="preview-meta"></span>
+    </div>
+    <div class="preview-pages" id="preview-pages"></div>
+    <div class="spacer"></div>
+  </section>
+
+  <!-- ============ HISTORY ============ -->
+  <section class="view" id="view-history" data-view="history">
+    <div class="panel-head"><strong>Saved quotations</strong><span>Every PDF you make is saved here on this phone.</span></div>
+    <input class="search" id="history-search" placeholder="Search client, brand, ref…">
+    <div id="history-list"></div>
+    <div class="spacer"></div>
+  </section>
+
+  <!-- ============ SETTINGS ============ -->
+  <section class="view" id="view-settings" data-view="settings">
+    <div class="panel-head"><strong>Brands</strong><span>Saved brand names and addresses you pick from.</span></div>
+    <div id="brand-list"></div>
+    <button class="btn-line" id="btn-add-brand" type="button">+ Add brand</button>
+
+    <div class="panel-head"><strong>People</strong><span>Signatories you can tick on any quotation.</span></div>
+    <div id="person-list"></div>
+
+    <div class="panel-head"><strong>Letterhead</strong><span>The A4 background used for every page.</span></div>
+    <div class="lh-row">
+      <img id="lh-thumb" alt="Letterhead preview">
+      <div class="lh-actions">
+        <label class="btn-line file-btn">Upload new letterhead<input type="file" id="lh-file" accept="image/*" hidden></label>
+        <button class="btn-line" id="lh-reset" type="button">Use original</button>
+      </div>
+    </div>
+
+    <div class="panel-head"><strong>Backup</strong><span>Move brands, people and history to another phone.</span></div>
+    <div class="row-btns">
+      <button class="btn-line" id="btn-export" type="button">Export backup</button>
+      <label class="btn-line file-btn">Import backup<input type="file" id="import-file" accept="application/json" hidden></label>
+    </div>
+
+    <div class="panel-head"><strong>Install on phone</strong></div>
+    <p class="hint">Android (Chrome): menu ⋮ → <b>Install app</b> or <b>Add to Home screen</b>.<br>iPhone (Safari): Share button → <b>Add to Home Screen</b>.</p>
+    <div class="spacer"></div>
+  </section>
+
+  <!-- desktop preview pane -->
+  <aside class="side-preview" id="side-preview" aria-label="Live preview"></aside>
+</main>
+
+<!-- action bar -->
+<div class="actionbar" id="actionbar">
+  <div class="actionbar-sum"><span id="ab-brand">FUJI</span><strong id="ab-total">Tk. 0.00</strong></div>
+  <button class="btn-solid big" id="btn-generate" type="button">Make PDF</button>
+</div>
+
+<nav class="tabbar">
+  <button data-tab="form" class="on"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z M14 3v5h5 M9 12h7 M9 16h7"/></svg>Form</button>
+  <button data-tab="preview"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>Preview</button>
+  <button data-tab="history"><svg viewBox="0 0 24 24"><path d="M4 5h16v4H4z M5 9v10h14V9 M10 13h4"/></svg>Saved</button>
+  <button data-tab="settings"><svg viewBox="0 0 24 24"><path d="M4 7h10 M18 7h2 M4 17h4 M12 17h8 M16 5v4 M10 15v4"/></svg>Settings</button>
+</nav>
+
+<!-- PDF sheet -->
+<div class="sheet-backdrop" id="sheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <h2 id="sheet-title">Making PDF…</h2>
+    <p id="sheet-msg">Page 1 of 5</p>
+    <div class="progress"><i id="sheet-bar"></i></div>
+    <div class="sheet-btns" id="sheet-btns" hidden>
+      <button class="btn-solid" id="sh-download" type="button">Download PDF</button>
+      <button class="btn-solid alt" id="sh-share" type="button">Share (WhatsApp, e-mail…)</button>
+      <button class="btn-line" id="sh-open" type="button">Open</button>
+      <button class="btn-line" id="sh-close" type="button">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- brand edit dialog -->
+<div class="sheet-backdrop" id="brand-dialog" hidden>
+  <div class="sheet" role="dialog" aria-modal="true">
+    <h2 id="bd-title">Brand</h2>
+    <div class="fields">
+      <label class="f"><span>Brand name (short)</span><input id="bd-name" placeholder="FUJI"></label>
+      <label class="f"><span>Code in Ref. No</span><input id="bd-code" placeholder="FUJI" autocapitalize="characters"></label>
+      <label class="f full"><span>Company full name</span><input id="bd-company" placeholder="FUJI Elevator Co. Ltd"></label>
+      <label class="f"><span>Country</span><input id="bd-country" list="country-list"></label>
+      <label class="f full"><span>Address</span><textarea id="bd-address" rows="3"></textarea></label>
+    </div>
+    <div class="row-btns">
+      <button class="btn-line danger" id="bd-delete" type="button">Delete</button>
+      <button class="btn-line" id="bd-cancel" type="button">Cancel</button>
+      <button class="btn-solid" id="bd-save" type="button">Save brand</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- off-screen render root used for PDF capture -->
+<div id="render-root" aria-hidden="true"></div>
+
+<script src="lib/html2canvas.min.js"></script>
+<script src="lib/jspdf.umd.min.js"></script>
+<script src="template.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
